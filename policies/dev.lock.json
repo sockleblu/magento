@@ -1,0 +1,565 @@
+{
+  "revision_id": "a43572de39f6687d995bd88a69be14d7dd12598992615559afbda59ea9c72170",
+  "name": "magento_dev",
+  "run_list": [
+    "recipe[magento::default]",
+    "recipe[devops_base::default]",
+    "recipe[magento_webapp::default]",
+    "recipe[magento_deploy::default]",
+    "recipe[magento_cache::default]",
+    "recipe[magento_cache::middleware]",
+    "recipe[magento_mysql::install_server]",
+    "recipe[magento_mysql::setup_files]",
+    "recipe[magento_mysql::install_dev_dbs]"
+  ],
+  "included_policy_locks": [
+
+  ],
+  "cookbook_locks": {
+    "apt": {
+      "version": "7.0.0",
+      "identifier": "ba17b16fdbd3a336d2eaff7afa3004880202269a",
+      "dotted_decimal_identifier": "52380396521509795.15431555492805168.4982195758746",
+      "cache_key": "apt-7.0.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/apt/versions/7.0.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/apt/versions/7.0.0/download",
+        "version": "7.0.0"
+      }
+    },
+    "build-essential": {
+      "version": "8.2.1",
+      "identifier": "4b9d5c72796184085681d3eefd625c90b79530a8",
+      "dotted_decimal_identifier": "21283643636408708.2346915420110178.101776625053864",
+      "cache_key": "build-essential-8.2.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/8.2.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/build-essential/versions/8.2.1/download",
+        "version": "8.2.1"
+      }
+    },
+    "cron": {
+      "version": "6.1.1",
+      "identifier": "bdafe22688fc65041cd1c1b0ae9bd2aaf96b6f68",
+      "dotted_decimal_identifier": "53392156442295397.1157587130166939.231631770840936",
+      "cache_key": "cron-6.1.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/cron/versions/6.1.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/cron/versions/6.1.1/download",
+        "version": "6.1.1"
+      }
+    },
+    "devops_base": {
+      "version": "0.1.9",
+      "identifier": "900e6a30716334df4cb6459a8d0d38b1207dc929",
+      "dotted_decimal_identifier": "40548245888394036.62853265541991693.62333405481257",
+      "cache_key": "devops_base-0.1.9",
+      "origin": "https://zmvvchefsrvr.zumiez.com/organizations/chef-automate",
+      "source_options": {
+        "chef_server": "https://zmvvchefsrvr.zumiez.com/organizations/chef-automate",
+        "version": "0.1.9"
+      }
+    },
+    "hostsfile": {
+      "version": "3.0.1",
+      "identifier": "4054324c36e266a714e89e9a3d160156a30f592d",
+      "dotted_decimal_identifier": "18106973513245286.47029310436556054.1471614507309",
+      "cache_key": "hostsfile-3.0.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/hostsfile/versions/3.0.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/hostsfile/versions/3.0.1/download",
+        "version": "3.0.1"
+      }
+    },
+    "logrotate": {
+      "version": "2.2.3",
+      "identifier": "7ad63847a1c2149199d70f442b9abda2c367cecd",
+      "dotted_decimal_identifier": "34575484366995988.40983020576189338.208506760711885",
+      "cache_key": "logrotate-2.2.3-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/logrotate/versions/2.2.3/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/logrotate/versions/2.2.3/download",
+        "version": "2.2.3"
+      }
+    },
+    "magento": {
+      "version": "0.1.35",
+      "identifier": "26b7c96f78c4e916b7e670d27c35880b1ef2b03c",
+      "dotted_decimal_identifier": "10898124901500137.6394649850838069.149581345239100",
+      "cache_key": "magento-0.1.35",
+      "origin": "https://zmvvchefsrvr.zumiez.com/organizations/chef-automate",
+      "source_options": {
+        "chef_server": "https://zmvvchefsrvr.zumiez.com/organizations/chef-automate",
+        "version": "0.1.35"
+      }
+    },
+    "magento_cache": {
+      "version": "0.1.36",
+      "identifier": "1f13fa44c562fb40ce91198f423dc09d35afe900",
+      "dotted_decimal_identifier": "8747689894568699.18241521103880765.211781443119360",
+      "cache_key": "magento_cache-0.1.36",
+      "origin": "https://zmvvchefsrvr.zumiez.com/organizations/chef-automate",
+      "source_options": {
+        "chef_server": "https://zmvvchefsrvr.zumiez.com/organizations/chef-automate",
+        "version": "0.1.36"
+      }
+    },
+    "magento_deploy": {
+      "version": "0.1.38",
+      "identifier": "4366a2086dbc3030d446f6518ff414ff239a15d2",
+      "dotted_decimal_identifier": "18971669551758384.13744200127451124.23086046516690",
+      "cache_key": "magento_deploy-0.1.38",
+      "origin": "https://zmvvchefsrvr.zumiez.com/organizations/chef-automate",
+      "source_options": {
+        "chef_server": "https://zmvvchefsrvr.zumiez.com/organizations/chef-automate",
+        "version": "0.1.38"
+      }
+    },
+    "magento_mysql": {
+      "version": "0.1.23",
+      "identifier": "c79cbd1a96aceb2e65b887e812bdbc2b5436968c",
+      "dotted_decimal_identifier": "56185856374254827.13059692157211325.206894282479244",
+      "cache_key": "magento_mysql-0.1.23",
+      "origin": "https://zmvvchefsrvr.zumiez.com/organizations/chef-automate",
+      "source_options": {
+        "chef_server": "https://zmvvchefsrvr.zumiez.com/organizations/chef-automate",
+        "version": "0.1.23"
+      }
+    },
+    "magento_webapp": {
+      "version": "0.1.22",
+      "identifier": "1bc98448134b28427c713273d95288a51be8151c",
+      "dotted_decimal_identifier": "7821394353277736.18714174082505042.150242719175964",
+      "cache_key": "magento_webapp-0.1.22",
+      "origin": "https://zmvvchefsrvr.zumiez.com/organizations/chef-automate",
+      "source_options": {
+        "chef_server": "https://zmvvchefsrvr.zumiez.com/organizations/chef-automate",
+        "version": "0.1.22"
+      }
+    },
+    "mingw": {
+      "version": "2.1.4",
+      "identifier": "37b76d310d308cc54853dcc88ec386023bfb02ae",
+      "dotted_decimal_identifier": "15682803321352332.55530095435615939.147344154362542",
+      "cache_key": "mingw-2.1.4-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/mingw/versions/2.1.4/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/mingw/versions/2.1.4/download",
+        "version": "2.1.4"
+      }
+    },
+    "mysql": {
+      "version": "8.5.1",
+      "identifier": "d4e0746684ec21ce1a36738cc3357a2cddc59e19",
+      "dotted_decimal_identifier": "59919485603474465.58012666371556149.134333117865497",
+      "cache_key": "mysql-8.5.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/mysql/versions/8.5.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/mysql/versions/8.5.1/download",
+        "version": "8.5.1"
+      }
+    },
+    "nginx": {
+      "version": "9.0.0",
+      "identifier": "0dca19d00840a97aa44d58c47aa831f793ba3faf",
+      "dotted_decimal_identifier": "3881386910433449.34520599267408552.54939405139887",
+      "cache_key": "nginx-9.0.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/nginx/versions/9.0.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/nginx/versions/9.0.0/download",
+        "version": "9.0.0"
+      }
+    },
+    "ohai": {
+      "version": "5.3.1",
+      "identifier": "381b58320bab1523f564ed194ee9d12555d501ab",
+      "dotted_decimal_identifier": "15792664306494229.10121438008266473.229958284018091",
+      "cache_key": "ohai-5.3.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/ohai/versions/5.3.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/ohai/versions/5.3.1/download",
+        "version": "5.3.1"
+      }
+    },
+    "php": {
+      "version": "6.1.1",
+      "identifier": "1522851edee4dfb5e0710d1a5dd1101d204ab215",
+      "dotted_decimal_identifier": "5948929654842591.51193746940386769.17717281862165",
+      "cache_key": "php-6.1.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/php/versions/6.1.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/php/versions/6.1.1/download",
+        "version": "6.1.1"
+      }
+    },
+    "redisio": {
+      "version": "3.0.0",
+      "identifier": "fb0cc8e9e334b46d4c1d9fb03e5cdec034eb85f6",
+      "dotted_decimal_identifier": "70664276211348660.30764462578351708.244917102937590",
+      "cache_key": "redisio-3.0.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/redisio/versions/3.0.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/redisio/versions/3.0.0/download",
+        "version": "3.0.0"
+      }
+    },
+    "selinux_policy": {
+      "version": "3.0.0",
+      "identifier": "2d16ac25e12a9000d1fb9981c170ca56fe1a35a8",
+      "dotted_decimal_identifier": "12691302577678992.230878542414192.222474979128744",
+      "cache_key": "selinux_policy-3.0.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/selinux_policy/versions/3.0.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/selinux_policy/versions/3.0.0/download",
+        "version": "3.0.0"
+      }
+    },
+    "seven_zip": {
+      "version": "3.2.0",
+      "identifier": "d374d8fece863d7e18d17afdceb5a5f28db7ca76",
+      "dotted_decimal_identifier": "59519695422654013.35493135056228021.182461178301046",
+      "cache_key": "seven_zip-3.2.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/3.2.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/seven_zip/versions/3.2.0/download",
+        "version": "3.2.0"
+      }
+    },
+    "ssh_known_hosts": {
+      "version": "6.1.3",
+      "identifier": "868fa356d6ab61c0c165db038263e0136c06a60b",
+      "dotted_decimal_identifier": "37875578578578273.54255838738743907.246374021375499",
+      "cache_key": "ssh_known_hosts-6.1.3-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/ssh_known_hosts/versions/6.1.3/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/ssh_known_hosts/versions/6.1.3/download",
+        "version": "6.1.3"
+      }
+    },
+    "trusted_certificate": {
+      "version": "3.2.0",
+      "identifier": "687dd4d42287e7fca7fdba7887efdf1f2bc74043",
+      "dotted_decimal_identifier": "29411750623479783.71116402328111087.245324971458627",
+      "cache_key": "trusted_certificate-3.2.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/trusted_certificate/versions/3.2.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/trusted_certificate/versions/3.2.0/download",
+        "version": "3.2.0"
+      }
+    },
+    "ulimit": {
+      "version": "1.1.1",
+      "identifier": "8691d1c422a0737aa73719df5b1336a3d289d3bf",
+      "dotted_decimal_identifier": "37877977004023923.34523802257808147.60077239817151",
+      "cache_key": "ulimit-1.1.1-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/ulimit/versions/1.1.1/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/ulimit/versions/1.1.1/download",
+        "version": "1.1.1"
+      }
+    },
+    "windows": {
+      "version": "7.0.2",
+      "identifier": "d30610e83214a12feb3f8c2fe67d24ff7f42fa8e",
+      "dotted_decimal_identifier": "59397889770788001.13487982072817277.40679770356366",
+      "cache_key": "windows-7.0.2-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/7.0.2/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/windows/versions/7.0.2/download",
+        "version": "7.0.2"
+      }
+    },
+    "yum-epel": {
+      "version": "4.5.0",
+      "identifier": "dad6a6c002700a1ae06443e61afaf9abf5b6e2ab",
+      "dotted_decimal_identifier": "61597556597223434.7565070634982138.274516957127339",
+      "cache_key": "yum-epel-4.5.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/yum-epel/versions/4.5.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/yum-epel/versions/4.5.0/download",
+        "version": "4.5.0"
+      }
+    }
+  },
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+
+  },
+  "solution_dependencies": {
+    "Policyfile": [
+      [
+        "apt",
+        "= 7.0.0"
+      ],
+      [
+        "build-essential",
+        "= 8.2.1"
+      ],
+      [
+        "cron",
+        "= 6.1.1"
+      ],
+      [
+        "devops_base",
+        "= 0.1.9"
+      ],
+      [
+        "hostsfile",
+        "= 3.0.1"
+      ],
+      [
+        "logrotate",
+        "= 2.2.3"
+      ],
+      [
+        "magento",
+        "= 0.1.35"
+      ],
+      [
+        "magento_cache",
+        "= 0.1.36"
+      ],
+      [
+        "magento_deploy",
+        "= 0.1.38"
+      ],
+      [
+        "magento_mysql",
+        "= 0.1.23"
+      ],
+      [
+        "magento_webapp",
+        "= 0.1.22"
+      ],
+      [
+        "mingw",
+        "= 2.1.4"
+      ],
+      [
+        "mysql",
+        "= 8.5.1"
+      ],
+      [
+        "nginx",
+        "= 9.0.0"
+      ],
+      [
+        "ohai",
+        "= 5.3.1"
+      ],
+      [
+        "php",
+        "= 6.1.1"
+      ],
+      [
+        "redisio",
+        "= 3.0.0"
+      ],
+      [
+        "selinux_policy",
+        "= 3.0.0"
+      ],
+      [
+        "seven_zip",
+        "= 3.2.0"
+      ],
+      [
+        "ssh_known_hosts",
+        "= 6.1.3"
+      ],
+      [
+        "trusted_certificate",
+        "= 3.2.0"
+      ],
+      [
+        "ulimit",
+        "= 1.1.1"
+      ],
+      [
+        "windows",
+        "= 7.0.2"
+      ],
+      [
+        "yum-epel",
+        "= 4.5.0"
+      ]
+    ],
+    "dependencies": {
+      "apt (7.0.0)": [
+
+      ],
+      "build-essential (8.2.1)": [
+        [
+          "seven_zip",
+          ">= 0.0.0"
+        ],
+        [
+          "mingw",
+          ">= 1.1.0"
+        ]
+      ],
+      "cron (6.1.1)": [
+
+      ],
+      "devops_base (0.1.9)": [
+        [
+          "apt",
+          "~> 7.0.0"
+        ],
+        [
+          "trusted_certificate",
+          "~> 3.2.0"
+        ]
+      ],
+      "hostsfile (3.0.1)": [
+
+      ],
+      "logrotate (2.2.3)": [
+
+      ],
+      "magento (0.1.35)": [
+
+      ],
+      "magento_cache (0.1.36)": [
+        [
+          "redisio",
+          "~> 3.0.0"
+        ]
+      ],
+      "magento_deploy (0.1.38)": [
+        [
+          "devops_base",
+          "~> 0.1.2"
+        ],
+        [
+          "cron",
+          "~> 6.1.1"
+        ],
+        [
+          "php",
+          "~> 6.1.1"
+        ],
+        [
+          "ssh_known_hosts",
+          "~> 6.1.1"
+        ],
+        [
+          "magento_webapp",
+          "~> 0.1.19"
+        ]
+      ],
+      "magento_mysql (0.1.23)": [
+        [
+          "devops_base",
+          "~> 0.1.2"
+        ],
+        [
+          "mysql",
+          "~> 8.5.1"
+        ]
+      ],
+      "magento_webapp (0.1.22)": [
+        [
+          "cron",
+          "~> 6.1.1"
+        ],
+        [
+          "devops_base",
+          "~> 0.1.4"
+        ],
+        [
+          "hostsfile",
+          "~> 3.0.1"
+        ],
+        [
+          "nginx",
+          "~> 9.0.0"
+        ],
+        [
+          "php",
+          "~> 6.1.1"
+        ],
+        [
+          "logrotate",
+          "~> 2.2.0"
+        ]
+      ],
+      "mingw (2.1.4)": [
+        [
+          "seven_zip",
+          ">= 0.0.0"
+        ]
+      ],
+      "mysql (8.5.1)": [
+
+      ],
+      "nginx (9.0.0)": [
+        [
+          "build-essential",
+          ">= 5.0.0"
+        ],
+        [
+          "ohai",
+          ">= 4.1.0"
+        ],
+        [
+          "yum-epel",
+          ">= 0.0.0"
+        ]
+      ],
+      "ohai (5.3.1)": [
+
+      ],
+      "php (6.1.1)": [
+        [
+          "build-essential",
+          ">= 5.0.0"
+        ],
+        [
+          "yum-epel",
+          ">= 0.0.0"
+        ]
+      ],
+      "redisio (3.0.0)": [
+        [
+          "ulimit",
+          ">= 0.1.2"
+        ],
+        [
+          "build-essential",
+          ">= 5.0.0"
+        ],
+        [
+          "selinux_policy",
+          ">= 0.0.0"
+        ]
+      ],
+      "selinux_policy (3.0.0)": [
+
+      ],
+      "seven_zip (3.2.0)": [
+        [
+          "windows",
+          ">= 0.0.0"
+        ]
+      ],
+      "ssh_known_hosts (6.1.3)": [
+
+      ],
+      "trusted_certificate (3.2.0)": [
+
+      ],
+      "ulimit (1.1.1)": [
+
+      ],
+      "windows (7.0.2)": [
+
+      ],
+      "yum-epel (4.5.0)": [
+
+      ]
+    }
+  }
+}

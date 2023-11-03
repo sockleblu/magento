@@ -1,0 +1,220 @@
+{
+  "revision_id": "8e77210873a0353b03d2f8df769f675954d68bd699bf31b859fbd6a6cb9564fc",
+  "name": "magento_endeca",
+  "run_list": [
+    "recipe[magento::default]",
+    "recipe[devops_base::default]",
+    "recipe[devops_base::resolver]",
+    "recipe[magento_endeca::default]"
+  ],
+  "included_policy_locks": [
+
+  ],
+  "cookbook_locks": {
+    "chef-client": {
+      "version": "11.5.0",
+      "identifier": "7cb128f1330f3a4f43fe674f3a1626d4cb5aec37",
+      "dotted_decimal_identifier": "35097686515584826.22311283094141462.42695386655799",
+      "cache_key": "chef-client-11.5.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/chef-client/versions/11.5.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/chef-client/versions/11.5.0/download",
+        "version": "11.5.0"
+      }
+    },
+    "cron": {
+      "version": "6.4.0",
+      "identifier": "c112ad00b72022a61c427b3deedef49b3a7e043d",
+      "dotted_decimal_identifier": "54345204755800098.46755917995044574.268947538445373",
+      "cache_key": "cron-6.4.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/cron/versions/6.4.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/cron/versions/6.4.0/download",
+        "version": "6.4.0"
+      }
+    },
+    "devops_base": {
+      "version": "0.2.17",
+      "identifier": "eb13f1389fbba403b30d056a74efa1238f662af5",
+      "dotted_decimal_identifier": "66168546285042596.1041293436941551.177174101764853",
+      "cache_key": "devops_base-0.2.17",
+      "origin": "https://zmvvchefsrvr.zumiez.com/organizations/chef-automate",
+      "source_options": {
+        "chef_server": "https://zmvvchefsrvr.zumiez.com/organizations/chef-automate",
+        "version": "0.2.17"
+      }
+    },
+    "logrotate": {
+      "version": "2.3.0",
+      "identifier": "75c4e3e2c86d65f88e5fea6ac7ad97eaff009185",
+      "dotted_decimal_identifier": "33149055316553061.69962336830146477.167035556368773",
+      "cache_key": "logrotate-2.3.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/logrotate/versions/2.3.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/logrotate/versions/2.3.0/download",
+        "version": "2.3.0"
+      }
+    },
+    "magento": {
+      "version": "0.1.20",
+      "identifier": "38cc6971a0fa8ae26e8f9fd31019e71ccbf7d1be",
+      "dotted_decimal_identifier": "15987351945804426.63734907877396505.254110867116478",
+      "source": "..",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": null,
+        "revision": "eeb7da2c5982bb63a6651c7818d9fc3cecc9e8e0",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/master"
+        ]
+      },
+      "source_options": {
+        "path": ".."
+      }
+    },
+    "magento_endeca": {
+      "version": "0.1.1",
+      "identifier": "426d86dd9e43229d1c5f5efac03b5169b5c1c069",
+      "dotted_decimal_identifier": "18697774474085154.44222767284535355.89514462789737",
+      "cache_key": "magento_endeca-e36764274b91f4d6aaef73e5552d4a2e2b46c94a",
+      "origin": "git@git.zumiez.com:cookbooks/magento_endeca.git",
+      "source_options": {
+        "git": "git@git.zumiez.com:cookbooks/magento_endeca.git",
+        "revision": "e36764274b91f4d6aaef73e5552d4a2e2b46c94a"
+      }
+    },
+    "ohai": {
+      "version": "5.3.0",
+      "identifier": "3ad58179813321f2497a12ea4e2bbb6018a47ee3",
+      "dotted_decimal_identifier": "16560300715225889.68197733016161835.206021404688099",
+      "cache_key": "ohai-5.3.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/ohai/versions/5.3.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/ohai/versions/5.3.0/download",
+        "version": "5.3.0"
+      }
+    },
+    "resolver": {
+      "version": "2.1.0",
+      "identifier": "6bbbd0fc43fb59b2fe8ffe3c417a720706a1a486",
+      "dotted_decimal_identifier": "30324328767945561.50382440253636986.125374501594246",
+      "cache_key": "resolver-2.1.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/resolver/versions/2.1.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/resolver/versions/2.1.0/download",
+        "version": "2.1.0"
+      }
+    },
+    "trusted_certificate": {
+      "version": "3.2.0",
+      "identifier": "687dd4d42287e7fca7fdba7887efdf1f2bc74043",
+      "dotted_decimal_identifier": "29411750623479783.71116402328111087.245324971458627",
+      "cache_key": "trusted_certificate-3.2.0-supermarket.chef.io",
+      "origin": "https://supermarket.chef.io:443/api/v1/cookbooks/trusted_certificate/versions/3.2.0/download",
+      "source_options": {
+        "artifactserver": "https://supermarket.chef.io:443/api/v1/cookbooks/trusted_certificate/versions/3.2.0/download",
+        "version": "3.2.0"
+      }
+    }
+  },
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+
+  },
+  "solution_dependencies": {
+    "Policyfile": [
+      [
+        "chef-client",
+        "= 11.5.0"
+      ],
+      [
+        "cron",
+        "= 6.4.0"
+      ],
+      [
+        "devops_base",
+        "= 0.2.17"
+      ],
+      [
+        "logrotate",
+        "= 2.3.0"
+      ],
+      [
+        "magento",
+        ">= 0.0.0"
+      ],
+      [
+        "magento_endeca",
+        ">= 0.0.0"
+      ],
+      [
+        "ohai",
+        "= 5.3.0"
+      ],
+      [
+        "resolver",
+        "= 2.1.0"
+      ],
+      [
+        "trusted_certificate",
+        "= 3.2.0"
+      ]
+    ],
+    "dependencies": {
+      "chef-client (11.5.0)": [
+        [
+          "cron",
+          ">= 4.2.0"
+        ],
+        [
+          "logrotate",
+          ">= 1.9.0"
+        ]
+      ],
+      "cron (6.4.0)": [
+
+      ],
+      "devops_base (0.2.17)": [
+        [
+          "trusted_certificate",
+          "~> 3.2.0"
+        ],
+        [
+          "chef-client",
+          "~> 11.5.0"
+        ],
+        [
+          "resolver",
+          "~> 2.1.0"
+        ],
+        [
+          "ohai",
+          "~> 5.3.0"
+        ]
+      ],
+      "logrotate (2.3.0)": [
+
+      ],
+      "magento (0.1.20)": [
+
+      ],
+      "magento_endeca (0.1.1)": [
+
+      ],
+      "ohai (5.3.0)": [
+
+      ],
+      "resolver (2.1.0)": [
+
+      ],
+      "trusted_certificate (3.2.0)": [
+
+      ]
+    }
+  }
+}

@@ -1,0 +1,988 @@
+before_script:
+  - export CHEF_LICENSE="accept"
+
+stages:
+ - lint
+# - unit
+ - deploy
+ - release_dev
+ - release_preview
+ - validate_preview
+ - release_acceptance
+ - validate_acceptance
+ - staging_check
+ - release_staging
+ - validate_staging
+ - prod_check
+ - release_prod
+ - validate_prod
+
+cookstyle:
+  stage: lint
+  tags:
+    - lynn
+    - linux
+    - cicd
+  script:
+    - chef exec cookstyle -a
+    - chef exec cookstyle
+
+foodcritic:
+  stage: lint
+  tags:
+    - lynn
+    - linux
+    - cicd
+  script:
+    - chef exec foodcritic . --tags ~FC093 --tags ~FC123 --tags ~FC039 
+
+#unit:
+#  stage: unit
+#  tags:
+#    - lynn
+#    - linux
+#    - ubuntu
+#  script:
+#    - chef exec rspec spec/
+
+deploy_lynn:
+  stage: deploy
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script: 
+    - berks install
+    - berks upload
+      #    - knife cookbook upload $CI_PROJECT_NAME -o ../
+  only:
+    refs:
+      - master
+    changes:
+      - metadata.rb
+
+deploy_dfw:
+  stage: deploy
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - berks install
+    - berks upload
+      #    - knife cookbook upload $CI_PROJECT_NAME -o ../
+  only:
+    refs:
+      - master
+    changes:
+      - metadata.rb
+      
+#======================================
+#            Release Dev
+#======================================
+
+release_dev_lynn:
+  stage: release_dev
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/dev.rb
+    - chef push dev policies/dev.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/dev.lock.json"
+
+release_dev_dfw:
+  stage: release_dev
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/dev.rb
+    - chef push dev policies/dev.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/dev.lock.json"
+
+#======================================
+#           Release Preview
+#======================================
+
+## magento_utility
+
+preview_utility_lynn:
+  stage: release_preview
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/utility.rb
+    - chef push test_us policies/utility.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/utility.lock.json"
+
+preview_utility_dfw:
+  stage: release_preview
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/utility.rb
+    - chef push test_us policies/utility.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/utility.lock.json"
+
+## magento_webapp
+preview_webapp_lynn:
+  stage: release_preview
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/webapp.rb
+    - chef push test_us policies/webapp.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/webapp.lock.json"
+
+preview_webapp_dfw:
+  stage: release_preview
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/webapp.rb
+    - chef push test_us policies/webapp.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/webapp.lock.json"
+
+## magento_data
+preview_data_lynn:
+  stage: release_preview
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/data.rb
+    - chef push test_us policies/data.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/data.lock.json"
+
+preview_data_dfw:
+  stage: release_preview
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/data.rb
+    - chef push test_us policies/data.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/data.lock.json"
+
+## magento_cache
+preview_cache_lynn:
+  stage: release_preview
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/cache.rb
+    - chef push test_us policies/cache.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/cache.lock.json"
+
+preview_cache_dfw:
+  stage: release_preview
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/cache.rb
+    - chef push test_us policies/cache.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/cache.lock.json"
+
+validate_preview:
+  stage: validate_preview
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - echo "hello"
+    #- chef update policies/cache.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/utility.lock.json"
+      - "policies/webapp.lock.json"
+      - "policies/data.lock.json"
+
+#======================================
+#           Release Acceptance
+#======================================
+
+## magento_utility
+
+acceptance_utility_lynn:
+  stage: release_acceptance
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/utility.rb
+    - chef push acceptance_us policies/utility.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/utility.lock.json"
+
+acceptance_utility_dfw:
+  stage: release_acceptance
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/utility.rb
+    - chef push acceptance_us policies/utility.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/utility.lock.json"
+
+## magento_webapp
+acceptance_webapp_lynn:
+  stage: release_acceptance
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/webapp.rb
+    - chef push acceptance_us policies/webapp.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/webapp.lock.json"
+
+acceptance_webapp_dfw:
+  stage: release_acceptance
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/webapp.rb
+    - chef push acceptance_us policies/webapp.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/webapp.lock.json"
+
+## magento_data
+acceptance_data_lynn:
+  stage: release_acceptance
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/data.rb
+    - chef push acceptance_us policies/data.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/data.lock.json"
+
+acceptance_data_dfw:
+  stage: release_acceptance
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/data.rb
+    - chef push acceptance_us policies/data.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/data.lock.json"
+
+## magento_admin
+acceptance_admin_lynn:
+  stage: release_acceptance
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/admin.rb
+    - chef push acceptance_us policies/admin.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/admin.lock.json"
+
+acceptance_admin_dfw:
+  stage: release_acceptance
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/admin.rb
+    - chef push acceptance_us policies/admin.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/admin.lock.json"
+
+## magento_api
+acceptance_api_lynn:
+  stage: release_acceptance
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/api.rb
+    - chef push acceptance_us policies/api.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/api.lock.json"
+
+acceptance_api_dfw:
+  stage: release_acceptance
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/api.rb
+    - chef push acceptance_us policies/api.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/api.lock.json"
+
+## magento_cache
+acceptance_cache_lynn:
+  stage: release_acceptance
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/cache.rb
+    - chef push acceptance_us policies/cache.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/cache.lock.json"
+
+acceptance_cache_dfw:
+  stage: release_acceptance
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/cache.rb
+    - chef push acceptance_us policies/cache.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/cache.lock.json"
+
+## magento_endeca
+acceptance_endeca_lynn:
+  stage: release_acceptance
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/endeca.rb
+    - chef push acceptance_us policies/endeca.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/endeca.lock.json"
+
+acceptance_endeca_dfw:
+  stage: release_acceptance
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/endeca.rb
+    - chef push acceptance_us policies/endeca.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/endeca.lock.json"
+
+validate_acceptance:
+  stage: validate_acceptance
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - echo "hello"
+    #- chef update policies/cache.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/utility.lock.json"
+      - "policies/webapp.lock.json"
+      - "policies/data.lock.json"
+      - "policies/admin.lock.json"
+      - "policies/api.lock.json"
+      - "policies/cache.lock.json"
+      - "policies/endeca.lock.json"
+
+
+#======================================
+#           Release Staging
+#======================================
+
+staging_check:
+  stage: staging_check
+  tags:
+    - dfw
+    - linux
+    - cicd
+    - ubuntu
+  when: manual
+  allow_failure: false
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/utility.lock.json"
+      - "policies/webapp.lock.json"
+      - "policies/data.lock.json"
+      - "policies/admin.lock.json"
+      - "policies/api.lock.json"
+      - "policies/cache.lock.json"
+  script:
+    - echo "Releasing Policy to Staging"
+
+## magento_utility
+
+staging_utility_lynn:
+  stage: release_staging
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/utility.rb
+    - chef push staging_us policies/utility.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/utility.lock.json"
+
+staging_utility_dfw:
+  stage: release_staging
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/utility.rb
+    - chef push staging_us policies/utility.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/utility.lock.json"
+
+## magento_webapp
+staging_webapp_lynn:
+  stage: release_staging
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/webapp.rb
+    - chef push staging_us policies/webapp.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/webapp.lock.json"
+
+staging_webapp_dfw:
+  stage: release_staging
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/webapp.rb
+    - chef push staging_us policies/webapp.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/webapp.lock.json"
+
+## magento_data
+staging_data_lynn:
+  stage: release_staging
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/data.rb
+    - chef push staging_us policies/data.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/data.lock.json"
+
+staging_data_dfw:
+  stage: release_staging
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/data.rb
+    - chef push staging_us policies/data.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/data.lock.json"
+
+## magento_cache
+staging_cache_lynn:
+  stage: release_staging
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/cache.rb
+    - chef push staging_us policies/cache.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/cache.lock.json"
+
+staging_cache_dfw:
+  stage: release_staging
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/cache.rb
+    - chef push staging_us policies/cache.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/cache.lock.json"
+
+validate_staging:
+  stage: validate_staging
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - echo "hello"
+    #- chef update policies/cache.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/utility.lock.json"
+      - "policies/webapp.lock.json"
+      - "policies/data.lock.json"
+
+#======================================
+#           Release Prod
+#======================================
+
+prod_check:
+  stage: prod_check
+  tags:
+    - dfw
+    - linux
+    - cicd
+    - ubuntu
+  when: manual
+  allow_failure: false
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/utility.lock.json"
+      - "policies/webapp.lock.json"
+      - "policies/data.lock.json"
+      - "policies/admin.lock.json"
+      - "policies/api.lock.json"
+      - "policies/cache.lock.json"
+      - "policies/endeca.lock.json"
+  script:
+    - echo "Releasing Policy to Production"
+
+## magento_utility
+
+prod_utility_lynn:
+  stage: release_prod
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/utility.rb
+    - chef push prod_us policies/utility.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/utility.lock.json"
+
+prod_utility_dfw:
+  stage: release_prod
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/utility.rb
+    - chef push prod_us policies/utility.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/utility.lock.json"
+
+## magento_webapp
+prod_webapp_lynn:
+  stage: release_prod
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/webapp.rb
+    - chef push prod_us policies/webapp.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/webapp.lock.json"
+
+prod_webapp_dfw:
+  stage: release_prod
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/webapp.rb
+    - chef push prod_us policies/webapp.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/webapp.lock.json"
+
+## magento_data
+prod_data_lynn:
+  stage: release_prod
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/data.rb
+    - chef push prod_us policies/data.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/data.lock.json"
+
+prod_data_dfw:
+  stage: release_prod
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/data.rb
+    - chef push prod_us policies/data.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/data.lock.json"
+
+## magento_admin
+prod_admin_lynn:
+  stage: release_prod
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/admin.rb
+    - chef push prod_us policies/admin.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/admin.lock.json"
+
+prod_admin_dfw:
+  stage: release_prod
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/admin.rb
+    - chef push prod_us policies/admin.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/admin.lock.json"
+
+## magento_api
+prod_api_lynn:
+  stage: release_prod
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/api.rb
+    - chef push prod_us policies/api.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/api.lock.json"
+
+prod_api_dfw:
+  stage: release_prod
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/api.rb
+    - chef push prod_us policies/api.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/api.lock.json"
+
+## magento_cache
+prod_cache_lynn:
+  stage: release_prod
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/cache.rb
+    - chef push prod_us policies/cache.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/cache.lock.json"
+
+prod_cache_dfw:
+  stage: release_prod
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/cache.rb
+    - chef push prod_us policies/cache.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/cache.lock.json"
+
+## magento_endeca
+prod_endeca_lynn:
+  stage: release_prod
+  tags:
+    - lynn
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/endeca.rb
+    - chef push prod_us policies/endeca.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/endeca.lock.json"
+
+prod_endeca_dfw:
+  stage: release_prod
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - chef update policies/endeca.rb
+    - chef push prod_us policies/endeca.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/endeca.lock.json"
+
+validate_prod:
+  stage: validate_prod
+  tags:
+    - dfw
+    - linux
+    - ubuntu
+    - cicd
+  script:
+    - echo "hello"
+    #- chef update policies/cache.rb
+  only:
+    refs:
+      - master
+    changes:
+      - "policies/utility.lock.json"
+      - "policies/webapp.lock.json"
+      - "policies/data.lock.json"
+      - "policies/admin.lock.json"
+      - "policies/api.lock.json"
+      - "policies/cache.lock.json"
+      - "policies/endeca.lock.json"

@@ -1,0 +1,363 @@
+---
+driver:
+  name: dokken
+  privileged: true  # because Docker and SystemD/Upstart
+  chef_version: <%= ENV['CHEF_VERSION'] || 'current' %>
+  env: [CHEF_LICENSE=accept]
+
+transport:
+  name: dokken
+
+provisioner:
+  name: dokken
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu-14.04
+    driver:
+      image: dokken/ubuntu-14.04
+      pid_one_command: /sbin/init
+#  - name: ubuntu-16.04
+#    driver:
+#      image: dokken/ubuntu-16.04
+#      pid_one_command: /bin/systemd
+
+suites:
+  - name: zumiez-dev
+    provisioner:
+      policyfile: policies/dev.rb
+    verifier:
+      inspec_tests:
+#        - test/integration/zumiez/dev
+        - test/integration/zumiez/dev/com
+        - test/integration/zumiez/dev/ca
+  - name: webapp-preview-zumiez-com
+    provisioner:
+      policyfile: policies/webapp.rb
+    verifier:
+      inspec_tests:
+        - test/integration/app
+        - test/integration/app/preview_zumiez_com/webapp
+  - name: data-preview-zumiez-com
+    provisioner:
+      policyfile: policies/data.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/preview
+        - test/integration/zumiez/preview/com
+        - test/integration/zumiez/preview/com/data
+  - name: cache-preview-zumiez-com
+    provisioner:
+      policyfile: policies/cache.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/preview
+        - test/integration/zumiez/preview/com
+        - test/integration/zumiez/preview/com/cache
+  - name: utility-preview-zumiez-com
+    provisioner:
+      policyfile: policies/utility.rb
+    verifier:
+      inspec_tests:
+        - test/integration/app
+        - test/integration/app/preview_zumiez_com
+        - test/integration/app/preview_zumiez_com/utility
+  - name: webapp-acceptance-zumiez-com
+    provisioner:
+      policyfile: policies/webapp.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/acceptance
+        - test/integration/zumiez/acceptance/com
+        - test/integration/zumiez/acceptance/com/webapp
+  - name: api-acceptance-zumiez-com
+    provisioner:
+      policyfile: policies/api.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/acceptance
+        - test/integration/zumiez/acceptance/com
+        - test/integration/zumiez/acceptance/com/api
+  - name: admin-acceptance-zumiez-com
+    provisioner:
+      policyfile: policies/admin.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/acceptance
+        - test/integration/zumiez/acceptance/com
+        - test/integration/zumiez/acceptance/com/admin
+  - name: data-acceptance-zumiez-com
+    provisioner:
+      policyfile: policies/data.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/acceptance
+        - test/integration/zumiez/acceptance/com
+        - test/integration/zumiez/acceptance/com/data
+  - name: cache-acceptance-zumiez-com
+    provisioner:
+      policyfile: policies/cache.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/acceptance
+        - test/integration/zumiez/acceptance/com
+        - test/integration/zumiez/acceptance/com/cache
+  - name: utility-accaptance-zumiez-com
+    provisioner:
+      policyfile: policies/utility.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/accaptance
+        - test/integration/zumiez/accaptance/com
+        - test/integration/zumiez/accaptance/com/utility
+  - name: webapp-staging-zumiez-com
+    provisioner:
+      policyfile: policies/webapp.rb
+    attributes: { 'test_kitchen' : 'true' }
+    verifier:
+      inspec_tests:
+        - test/integration/app
+        - test/integration/app/staging_zumiez_com
+        - test/integration/app/staging_zumiez_com/webapp
+        #- test/integration/app/staging_zumiez_com/webapp/nginx_test.rb
+  - name: data-staging-zumiez-com
+    provisioner:
+      policyfile: policies/data.rb
+    verifier:
+      inspec_tests:
+#        - test/integration/data
+        - test/integration/data/staging_zumiez_com
+  - name: cache-staging-zumiez-com
+    provisioner:
+      policyfile: policies/cache.rb
+    verifier:
+      inspec_tests:
+        - test/integration/cache
+#        - test/integration/cache/staging_zumiez_com
+  - name: utility-staging-zumiez-com
+    provisioner:
+      policyfile: policies/utility.rb
+    verifier:
+      inspec_tests:
+        - test/integration/app
+        - test/integration/app/staging_zumiez_com/utility
+  - name: webapp-prod-zumiez-com
+    provisioner:
+      policyfile: policies/webapp.rb
+    attributes: { 'test_kitchen' : 'true' }
+    verifier:
+      inspec_tests:
+        - test/integration/app
+        - test/integration/app/prod_zumiez_com
+        - test/integration/app/prod_zumiez_com/webapp
+        #- test/integration/app/prod_zumiez_com/webapp/nginx_test.rb
+  - name: api-prod-zumiez-com
+    provisioner:
+      policyfile: policies/api.rb
+    verifier:
+      inspec_tests:
+        - test/integration/app
+        - test/integration/app/prod_zumiez_com
+        - test/integration/app/prod_zumiez_com/api
+  - name: admin-prod-zumiez-com
+    provisioner:
+      policyfile: policies/admin.rb
+    verifier:
+      inspec_tests:
+        - test/integration/app
+        - test/integration/app/prod_zumiez_com
+        - test/integration/app/prod_zumiez_com/admin
+  - name: data-prod-zumiez-com
+    provisioner:
+      policyfile: policies/data.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/prod
+        - test/integration/zumiez/prod/com
+        - test/integration/zumiez/prod/com/data
+  - name: cache-prod-zumiez-com
+    provisioner:
+      policyfile: policies/cache.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/prod
+        - test/integration/zumiez/prod/com
+        - test/integration/zumiez/prod/com/cache
+  - name: utility-prod-zumiez-com
+    provisioner:
+      policyfile: policies/utility.rb
+    verifier:
+      inspec_tests:
+        - test/integration/app
+          #        - test/integration/zumiez/prod/com
+        - test/integration/app/prod_zumiez_com/utility
+  - name: endeca-prod-zumiez-com
+    provisioner:
+      policyfile: policies/endeca.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/prod
+        - test/integration/zumiez/prod/com
+        - test/integration/zumiez/prod/com/endeca
+#------------------------CA-----------------------
+  - name: webapp-preview-zumiez-ca
+    provisioner:
+      policyfile: policies/webapp.rb
+    verifier:
+      inspec_tests:
+        - test/integration/app
+        - test/integration/app/preview_zumiez_ca/webapp
+  - name: data-preview-zumiez-ca
+    provisioner:
+      policyfile: policies/data.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/preview
+        - test/integration/zumiez/preview/ca
+        - test/integration/zumiez/preview/ca/data
+  - name: cache-preview-zumiez-ca
+    provisioner:
+      policyfile: policies/cache.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/preview
+        - test/integration/zumiez/preview/ca
+        - test/integration/zumiez/preview/ca/cache
+  - name: utility-preview-zumiez-ca
+    provisioner:
+      policyfile: policies/utility.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/preview
+        - test/integration/zumiez/preview/ca
+        - test/integration/zumiez/preview/ca/utility
+  - name: webapp-acceptance-zumiez-ca
+    provisioner:
+      policyfile: policies/webapp.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/acceptance
+        - test/integration/zumiez/acceptance/ca
+        - test/integration/zumiez/acceptance/ca/webapp
+  - name: api-acceptance-zumiez-ca
+    provisioner:
+      policyfile: policies/api.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/acceptance
+        - test/integration/zumiez/acceptance/ca
+        - test/integration/zumiez/acceptance/ca/api
+  - name: admin-acceptance-zumiez-ca
+    provisioner:
+      policyfile: policies/admin.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/acceptance
+        - test/integration/zumiez/acceptance/ca
+        - test/integration/zumiez/acceptance/ca/admin
+  - name: data-acceptance-zumiez-ca
+    provisioner:
+      policyfile: policies/data.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/acceptance
+        - test/integration/zumiez/acceptance/ca
+        - test/integration/zumiez/acceptance/ca/data
+  - name: cache-acceptance-zumiez-ca
+    provisioner:
+      policyfile: policies/cache.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/acceptance
+        - test/integration/zumiez/acceptance/ca
+        - test/integration/zumiez/acceptance/ca/cache
+  - name: utility-acceptance-zumiez-ca
+    provisioner:
+      policyfile: policies/utility.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/acceptance
+        - test/integration/zumiez/acceptance/ca
+        - test/integration/zumiez/acceptance/ca/utility
+  - name: webapp-staging-zumiez-ca
+    provisioner:
+      policyfile: policies/webapp.rb
+    verifier:
+      inspec_tests:
+        - test/integration/app
+        - test/integration/app/staging_zumiez_ca/webapp
+#----------------------------------------------------------------
+  - name: data-staging-zumiez-ca
+    provisioner:
+      policyfile: policies/data.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/staging
+        - test/integration/zumiez/staging/ca
+        - test/integration/zumiez/staging/ca/data
+  - name: cache-staging-zumiez-ca
+    provisioner:
+      policyfile: policies/cache.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/staging
+        - test/integration/zumiez/staging/ca
+        - test/integration/zumiez/staging/ca/cache
+  - name: utility-staging-zumiez-ca
+    provisioner:
+      policyfile: policies/utility.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/staging
+        - test/integration/zumiez/staging/ca
+        - test/integration/zumiez/staging/ca/utility
+  - name: webapp-prod-zumiez-ca
+    provisioner:
+      policyfile: policies/webapp.rb
+    verifier:
+      inspec_tests:
+        - test/integration/app/prod_zumiez_ca/webapp
+        - test/integration/app/prod_zumiez_ca/webapp
+#----------------------------------------------------------------
+  - name: api-prod-zumiez-ca
+    provisioner:
+      policyfile: policies/api.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/prod
+        - test/integration/zumiez/prod/ca
+        - test/integration/zumiez/prod/ca/api
+  - name: admin-prod-zumiez-ca
+    provisioner:
+      policyfile: policies/admin.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/prod
+        - test/integration/zumiez/prod/ca
+        - test/integration/zumiez/prod/ca/admin
+  - name: data-prod-zumiez-ca
+    provisioner:
+      policyfile: policies/data.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/prod
+        - test/integration/zumiez/prod/ca
+        - test/integration/zumiez/prod/ca/data
+  - name: cache-prod-zumiez-ca
+    provisioner:
+      policyfile: policies/cache.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/prod
+        - test/integration/zumiez/prod/ca
+        - test/integration/zumiez/prod/ca/cache
+  - name: utility-prod-zumiez-ca
+    provisioner:
+      policyfile: policies/utility.rb
+    verifier:
+      inspec_tests:
+        - test/integration/zumiez/prod
+        - test/integration/zumiez/prod/ca
+        - test/integration/zumiez/prod/ca/utility

@@ -1,0 +1,9 @@
+Layout/IndentationWidth:
+  # Number of spaces for each indentation level.
+  Width: 4
+
+Lint/UselessAssignment:
+  Enabled: false
+
+Security/Eval:
+  Enabled: false
